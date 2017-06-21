@@ -1,0 +1,55 @@
+<!doctype html>
+<!--
+  Copyright 2017 JS
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Listado de equipos de fotografía robados en Argentina">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipos robados</title>
+
+  <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+<div class="container">
+	<h1>Bienvenido<h1>
+	<h3>
+		Hecho con amor usando <a href="https://www.firebase.com">Firebase</a> y <a href="https://pages.github.com">GitHub Pages</a>.
+	</h3>
+	
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Equipo</th>
+			<th>Propietario</th>
+			<th>E-mail</th>
+			<th>Teléfono</th>
+		</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+
+<!-- Import and configure the Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAVWoVbtNUlBMmnvswJStd1q6SMxoB_RHM",
+    authDomain: "camarasrobadas.firebaseapp.com",
+    databaseURL: "https://camarasrobadas.firebaseio.com",
+    projectId: "camarasrobadas",
+    storageBucket: "camarasrobadas.appspot.com",
+    messagingSenderId: "590820753359"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>

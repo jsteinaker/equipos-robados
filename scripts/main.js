@@ -11,7 +11,7 @@ database.on("child_added", function(child) {
 	var tr = document.createElement('tr');
 	// ID
 	var td = document.createElement('td');
-	td.innerText = JSON.stringify(child.val());
+	td.innerText = child.key;
 	tr.appendChild(td);
 	// Gear
 	var td = document.createElement('td');

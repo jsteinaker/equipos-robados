@@ -3,6 +3,7 @@
 // Referencia a la tabla y a la base de datos
 var table = document.getElementsByTagName('table')[0];
 var database = firebase.database().ref('gear');
+console.log("Refs OK");
 
 // Iniciamos
 database.on("child_added", function(child) {

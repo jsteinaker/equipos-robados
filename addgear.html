@@ -1,0 +1,45 @@
+<!doctype html>
+<!--
+  Copyright 2017 JS
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Listado de equipos de fotografía robados en Argentina">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargar equipo robado</title>
+
+  <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+	<div class="container">
+		<form action="/handling" method="post">
+			<div>
+				<label for="gear">Equipo</label>
+				<input type="text" id="gear" required>
+			</div>
+			<div>
+				<label for="serial">N° de Serie</label>
+				<input type="text" id="serial" required>
+			</div>
+			<div>
+				<label for="owner">Propietario</label>
+				<input type="text" id="owner" required>
+			</div>
+			<div>
+				<label for="e-mail">E-mail</label>
+				<input type="text" id="e-mail" required>
+			</div>
+			<div>
+				<label for="phone">Teléfono</label>
+				<input type="text" id="phone" required>
+			</div>
+			<div class="button">
+				<button type="submit">Cargar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

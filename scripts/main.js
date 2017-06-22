@@ -14,19 +14,23 @@ database.on("child_added", function(child) {
 	td.innerText = child.key;
 	tr.appendChild(td);
 	// Gear
-	var td = document.createElement('td');
+	td = document.createElement('td');
 	td.innerText = child.val().gear;
 	tr.appendChild(td);
+	// Serial
+	td = document.createElement('td');
+	td.innerText = child.val().serial;
+	tr.appendChild(td);
 	// Owner
-	var td = document.createElement('td');
+	td = document.createElement('td');
 	td.innerText = child.val().owner;
 	tr.appendChild(td);
 	// Email
-	var td = document.createElement('td');
+	td = document.createElement('td');
 	td.innerText = child.val().email;
 	tr.appendChild(td);
 	// Phone
-	var td = document.createElement('td');
+	td = document.createElement('td');
 	td.innerText = child.val().phone;
 	tr.appendChild(td);
 	table.appendChild(tr);

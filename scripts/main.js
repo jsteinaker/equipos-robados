@@ -9,8 +9,25 @@ console.log("Refs OK");
 database.on("child_added", function(child) {
 	console.log(child.key+': '+child.val());
 	var tr = document.createElement('tr');
+	// ID
 	var td = document.createElement('td');
-	td.innerText = child.val();
+	td.innerText = JSON.stringify(child.val());
+	tr.appendChild(td);
+	// Gear
+	var td = document.createElement('td');
+	td.innerText = child.val().gear;
+	tr.appendChild(td);
+	// Owner
+	var td = document.createElement('td');
+	td.innerText = child.val().owner;
+	tr.appendChild(td);
+	// Email
+	var td = document.createElement('td');
+	td.innerText = child.val().email;
+	tr.appendChild(td);
+	// Phone
+	var td = document.createElement('td');
+	td.innerText = child.val().phone;
 	tr.appendChild(td);
 	table.appendChild(tr);
 });

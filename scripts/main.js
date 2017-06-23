@@ -1,9 +1,8 @@
 'use strict';
 
 // Referencia a la tabla y a la base de datos
-var table = document.getElementsByTagName('table')[0];
+var table = document.getElementsByTagName('tbody')[0];
 var database = firebase.database().ref('gear');
-console.log("Refs OK");
 
 // Iniciamos
 database.on("child_added", function(child) {
@@ -35,3 +34,31 @@ database.on("child_added", function(child) {
 	tr.appendChild(td);
 	table.appendChild(tr);
 });
+
+// Cambia los botones de la navbar cuando el usuario se loguea/desloguea
+$("#login").click(function toggleSignInButtons() {
+	$("#loggedIn").toggleClass("hidden");
+	$("#loggedOff").toggleClass("hidden");
+});
+
+// Función de búsqueda
+function searchBySerial() {
+	var input, filter, table, tr, td, i;
+	input = document.getElementById("searchBySerial");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("mainTableBody");
+	tr = table.getElementsByTagName("tr");
+
+	for (i=0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[2];
+		if (td) {
+			if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			}
+			else
+				tr[i].style.display = "none";
+		}
+	}
+}
+
+

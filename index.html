@@ -57,56 +57,104 @@
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-										<input class="form-control login" type="text" placeholder="E-mail" required>
+										<input class="form-control login" type="text" id="emailField" placeholder="E-mail" required>
 									</div>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-										<input class="form-control login" type="password" placeholder="Contraseña" required>
+										<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" required>
 									</div>
 								</div>
+								<label id="wrongUserOrPassword" class="hidden">Usuario o contraseña inválidos</label>
 								<div class="form-group">
-									<button type="submit" class="btn btn-lg btn-primary btn-block">Ingresar</button>
+									<button type="submit" class="btn btn-lg btn-primary btn-block" id="loginButton">Ingresar</button>
 								</div>
 							</form>
 						</div>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right hidden" id="loggedIn">
-					<li><a href="#">jsteinaker@gmail.com</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="userName">noreply@noreply.com</a>
+						<div class="dropdown-menu">
+							<form class="form-signin" id="logout-form">
+								<div class="form-group">
+									<button type="submit" class="btn btn-lg btn-primary btn-block" id"=logoffButton">Cerrar sesión</button>
+								</div>
+							</form>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	
+	<div id="tabBar" class="container">
+		<ul class="nav nav-pills">
+			<li class="active"><a href="#list" data-toggle="tab">Listado</a></li>
+			<li><a href="#add" data-toggle="tab">Añadir equipo</a></li>
+		</ul>
 
-<div class="container">
-	<div class="row">
-		<div class="col-sm-12 input-group margin-bottom-sm">
-			<span class="input-group-addon"><i class="fa fa-search fa-fw" aria-hidden="true"></i></span>
-			<input class="form-control" type="text" id="searchBySerial" onkeyup="searchBySerial()" placeholder="Buscar por número de serie...">
+		<div class="tab-content clearfix">
+			<div class="tab-pane active" id="list">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-search fa-fw" aria-hidden="true"></i></span>
+					<input class="form-control" type="text" id="searchBySerial" onkeyup="searchBySerial()" placeholder="Buscar por número de serie...">
+				</div>
+				<div class="table-responsive">
+					<table class="table table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Equipo</th>
+								<th>Serial</th>
+								<th>Propietario</th>
+								<th>E-mail</th>
+								<th>Teléfono</th>
+							</tr>
+						</thead>
+						<tbody id="mainTableBody">
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="tab-pane" id="add">
+				<div id="addGearNotLoggedIn">
+					<h3>Debes iniciar sesión para poder añadir un nuevo equipo.</h3>
+				</div>
+				<div id="addGearLoggedIn" class="hidden">
+					<form>
+						<div class="form-group">
+							<label for="gearNameInput">Cámara o lente</label>
+							<input type="text" class="form-control" id="gearNameInput">
+						</div>
+						<div class="form-group">
+							<label for="serialNumberInput">Número de serie</label>
+							<input type="text" class="form-control" id="serialNumberInput">
+						</div>
+						<div class="form-group">
+							<label for="ownerInput">Propietario</label>
+							<input type="text" class="form-control" id="ownerInput">
+						</div>
+						<div class="form-group">
+							<label for="emailInput">E-mail</label>
+							<input type="email" class="form-control" id="emailInput">
+						</div>
+						<div class="form-group">
+							<label for="phoneInput">Teléfono</label>
+							<input type="number" class="form-control" id="phoneInput">
+						</div>
+						<button type="submit" class="btn btn-primary">Cargar equipo</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
-	
-	<div class="table-responsive">
-		<table class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Equipo</th>
-					<th>Serial</th>
-					<th>Propietario</th>
-					<th>E-mail</th>
-					<th>Teléfono</th>
-				</tr>
-			</thead>
-			<tbody id="mainTableBody">
-			</tbody>
-		</table>
-	</div>
-
-	<div>
-			Hecho con amor usando <a href="https://www.firebase.com">Firebase</a> y <a href="https://pages.github.com">GitHub Pages</a>.
-	</div>
-</div>
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">Hecho con amor usando <a href="https://www.firebase.com">Firebase</a> y <a href="https://pages.github.com">GitHub Pages</a>.</p>
+		</div>
+	</footer>
 
 <script>
   // Initialize Firebase

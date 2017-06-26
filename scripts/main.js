@@ -112,3 +112,17 @@ firebase.auth().onAuthStateChanged(function(user) {
 	}
 });
 
+
+/* Carga los datos a Firebase */
+$("#addGearForm").on('submit', function(event) {
+	var data = {
+		gear: $("#gearInput").val(),
+		serial: $("#serialInput").val(),
+		owner: $("#ownerInput").val(),
+		email: $("#emailInput").val(),
+		phone: $("#phoneInput").val()
+	};
+	console.log($("#serialInput").val());
+	console.log(data.serial);
+	database.push(data);
+});

@@ -74,7 +74,8 @@ database.on("child_added", function(child) {
 });
 
 // Función de login
-$("#login-form").on('submit', function firebaseLogin() {
+$("#login-form").on('submit', function(event) {
+	event.preventDefault();
 	// Borra el mensaje de usuario o contraseña errónea
 	// cada vez que reenviamos el formulario.
 	$("#wrongUserOrPassword").addClass("hidden");
@@ -89,6 +90,7 @@ $("#login-form").on('submit', function firebaseLogin() {
 			$("#wrongUserOrPassword").removeClass("hidden");
 		}
 	});
+	return false;
 });
 
 // Función de logout

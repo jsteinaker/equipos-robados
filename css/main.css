@@ -11,10 +11,6 @@ body {
 	width: 25vw;
 }
 
-.tab-content {
-	padding-top: 1vw;
-}
-
 .footer {
 	position: absolute;
 	bottom: 0;
@@ -31,4 +27,8 @@ body {
 
 p {
 	margin: 0;
+}
+
+.loggedInUI {
+	display: none;
 }

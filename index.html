@@ -1,160 +1,95 @@
-<!doctype html>
+﻿<!doctype html>
 <!--
   Copyright 2017 JS
 -->
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Listado de equipos de fotografía robados en Argentina">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equipos robados</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Listado de equipos de fotografía robados en Argentina">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Equipos robados</title>
 
-  <!-- FontAwesome y Bootstrap -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 
+	<!-- Bootstrap CSS-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- CSS del sitio -->
-	<link rel="stylesheet" href="css/main.css"
+	<link rel="stylesheet" href="css/main.css">
 
-  	<!-- AngularJS -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"</script> -->
-	
-	<!-- JQuery y la parte JavaScript de Bootstrap -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
-	
-	<!-- Firebase SDK -->
-	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 </head>
 
 <body>
-
-	<nav class="navbar navbar-inverse navbar-static-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-body" aria-expanded="false">
-					<span class="sr-only">Mostrar/Ocultar Navbar</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Cámaras robadas</a>
-			</div>
-			<div class="collapse navbar-collapse" id="navbar-body">
-				<ul class="nav navbar-nav">
-					<li><a href="#">Main</a></li>
-					<li><a href="#" id="login">Login</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right" id="loggedOff">
-					<li><a href="#" id="register">Registro</a></li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						Iniciar sesión <span class="caret"></span>
-						</a>
-						<div class="dropdown-menu">
-							<form class="form-signin" id="login-form">
-								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-										<input class="form-control login" type="text" id="emailField" placeholder="E-mail" required>
-									</div>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-										<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" required>
-									</div>
-								</div>
-								<label id="wrongUserOrPassword" class="hidden">Usuario o contraseña inválidos</label>
-								<div class="form-group">
-									<button type="submit" class="btn btn-lg btn-primary btn-block" id="loginButton">Ingresar</button>
-								</div>
-							</form>
-						</div>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right hidden" id="loggedIn">
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="userName">noreply@noreply.com</a>
-						<div class="dropdown-menu">
-							<form class="form-signin" id="logout-form">
-								<div class="form-group">
-									<button type="submit" class="btn btn-lg btn-primary btn-block" id"=logoffButton">Cerrar sesión</button>
-								</div>
-							</form>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	
-	<div id="tabBar" class="container">
-		<ul class="nav nav-pills">
-			<li class="active"><a href="#list" data-toggle="tab">Listado</a></li>
-			<li><a href="#add" data-toggle="tab">Añadir equipo</a></li>
+	<nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md mb-4">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-body" aria-expanded="false">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="#">Cámaras robadas</a>
+	<div class="collapse navbar-collapse" id="navbar-body">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#" id="mainLink">Listado</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#" id="addGearLink">Cargar equipo</a>
+			</li>
 		</ul>
-
-		<div class="tab-content clearfix">
-			<div class="tab-pane active" id="list">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-search fa-fw" aria-hidden="true"></i></span>
-					<input class="form-control" type="text" id="searchBySerial" onkeyup="searchBySerial()" placeholder="Buscar por número de serie...">
-				</div>
-				<div class="table-responsive">
-					<table class="table table-hover table-condensed">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Equipo</th>
-								<th>Serial</th>
-								<th>Propietario</th>
-								<th>E-mail</th>
-								<th>Teléfono</th>
-							</tr>
-						</thead>
-						<tbody id="mainTableBody">
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="tab-pane" id="add">
-				<div id="addGearNotLoggedIn">
-					<h3>Debes iniciar sesión para poder añadir un nuevo equipo.</h3>
-				</div>
-				<div id="addGearLoggedIn" class="hidden">
-					<form id="addGearForm">
+		<ul class="navbar-nav navbar-right loggedOutUI">
+			<li class="nav-item">
+				<a class="nav-link" href="#" id="registerButton">Registro</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+				Iniciar sesión <span class="caret"></span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<form class="dropdown-item form-signin" id="login-form">
 						<div class="form-group">
-							<label for="gearInput">Cámara o lente</label>
-							<input type="text" class="form-control" id="gearInput">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+								<input class="form-control login" type="text" id="emailField" placeholder="E-mail" required>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+								<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" required>
+							</div>
 						</div>
+						<label id="wrongUserOrPassword">Usuario o contraseña inválidos</label>
 						<div class="form-group">
-							<label for="serialInput">Número de serie</label>
-							<input type="text" class="form-control" id="serialInput">
+							<button type="submit" class="btn btn-lg btn-primary btn-block" id="loginButton">Ingresar</button>
 						</div>
-						<div class="form-group">
-							<label for="ownerInput">Propietario</label>
-							<input type="text" class="form-control" id="ownerInput">
-						</div>
-						<div class="form-group">
-							<label for="emailInput">E-mail</label>
-							<input type="email" class="form-control" id="emailInput">
-						</div>
-						<div class="form-group">
-							<label for="phoneInput">Teléfono</label>
-							<input type="number" class="form-control" id="phoneInput">
-						</div>
-						<button type="submit" class="btn btn-primary">Cargar equipo</button>
 					</form>
 				</div>
-			</div>
-		</div>
+			</li>
+		</ul>
+		<ul class="navbar-nav navbar-right loggedInUI">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userName"></a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<form class="dropdown-item form" id="logout-form">
+						<div class="form-group">
+							<button type="submit" class="btn btn-lg btn-primary btn-block" id"=logoffButton">Cerrar sesión</button>
+						</div>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</nav>
+	
+	<div id="body-container" class="container">	
 	</div>
 	<footer class="footer text-center">
 		<div class="container center-vertical">
 			<p class="text-muted">Hecho con amor usando <a href="https://www.firebase.com">Firebase</a> y <a href="https://pages.github.com">GitHub Pages</a>.</p>
 		</div>
 	</footer>
+
+	<!-- JQuery y la parte JavaScript de Bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	
+	<!-- Firebase SDK -->
+	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 
 <script>
   // Initialize Firebase

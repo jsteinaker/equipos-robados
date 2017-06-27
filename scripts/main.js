@@ -1,93 +1,56 @@
 'use strict';
 
-// Referencia a la tabla y a la base de datos
-var table = document.getElementsByTagName('tbody')[0];
+// Referencia a la base de datos
 var database = firebase.database().ref('gear');
+
+var table;
 
 // UI para usuarios logueados
 function changeUiOnLogIn(user) {
 	$("#userName").text(user.email);
 	$("#userName").append("<span class='caret'></span>");
-	$("#loggedIn").removeClass("hidden");
-	$("#loggedOff").addClass("hidden");
-	$("#addGearLoggedIn").removeClass("hidden");
-	$("#addGearNotLoggedIn").addClass("hidden");
+	$(".loggedInUI").show();
+	$(".loggedOutUI").hide();
 }
 
 // UI para usuarios sin loguear
 function changeUiOnLogOut() {
-	$("#loggedIn").addClass("hidden");
-	$("#loggedOff").removeClass("hidden");
-	$("#addGearLoggedIn").addClass("hidden");
-	$("#addGearNotLoggedIn").removeClass("hidden");
+	$(".loggedInUI").hide();
+	$(".loggedOutUI").show();
 }
 
-// Función de búsqueda
-function searchBySerial() {
-	var input, filter, table, tr, td, i;
-	input = document.getElementById("searchBySerial");
-	filter = input.value.toUpperCase();
-	table = document.getElementById("mainTableBody");
-	tr = table.getElementsByTagName("tr");
-
-	for (i=0; i < tr.length; i++) {
-		td = tr[i].getElementsByTagName("td")[2];
-		if (td) {
-			if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-				tr[i].style.display = "";
-			}
-			else
-				tr[i].style.display = "none";
+// Carga la página en el container 
+function loadPage(page) {
+	$("#body-container").load(page, function() {
+		var user = firebase.auth().currentUser;
+		if (user) {
+			changeUiOnLogIn(user);
 		}
-	}
+		else {
+			changeUiOnLogOut();
+		}
+	});
 }
 
 //  Hilo principal
-database.on("child_added", function(child) {
-	console.log(child.key+': '+child.val());
-	var tr = document.createElement('tr');
-	// ID
-	var td = document.createElement('td');
-	td.innerText = child.key;
-	tr.appendChild(td);
-	// Gear
-	td = document.createElement('td');
-	td.innerText = child.val().gear;
-	tr.appendChild(td);
-	// Serial
-	td = document.createElement('td');
-	td.innerText = child.val().serial;
-	tr.appendChild(td);
-	// Owner
-	td = document.createElement('td');
-	td.innerText = child.val().owner;
-	tr.appendChild(td);
-	// Email
-	td = document.createElement('td');
-	td.innerText = child.val().email;
-	tr.appendChild(td);
-	// Phone
-	td = document.createElement('td');
-	td.innerText = child.val().phone;
-	tr.appendChild(td);
-	table.appendChild(tr);
-});
+
+// Carga la vista del listado en el container div
+loadPage("main.html");
 
 // Función de login
 $("#login-form").on('submit', function(event) {
 	event.preventDefault();
 	// Borra el mensaje de usuario o contraseña errónea
 	// cada vez que reenviamos el formulario.
-	$("#wrongUserOrPassword").addClass("hidden");
+	$("#wrongUserOrPassword").hide();
 	var email = $("#emailField").val();
 	var password = $("#passwordField").val();
-	console.log(password);
 	firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 		// Handle errors here
 		console.log(error);
 		if (error.code == "auth/user-not-found"
 			|| error.code == "auth/wrong-password") {
-			$("#wrongUserOrPassword").removeClass("hidden");
+			$("#wrongUserOrPassword").show();
 		}
 	});
 	return false;
@@ -112,17 +75,18 @@ firebase.auth().onAuthStateChanged(function(user) {
 	}
 });
 
+// Carga el listado principal
+$("#mainLink").on('click', function() {
+	loadPage("main.html");
+	
+});
 
-/* Carga los datos a Firebase */
-$("#addGearForm").on('submit', function(event) {
-	var data = {
-		gear: $("#gearInput").val(),
-		serial: $("#serialInput").val(),
-		owner: $("#ownerInput").val(),
-		email: $("#emailInput").val(),
-		phone: $("#phoneInput").val()
-	};
-	console.log($("#serialInput").val());
-	console.log(data.serial);
-	database.push(data);
+// Carga la página de Registro
+$("#registerButton").on('click', function() {
+	loadPage("register.html");
+});
+
+// Carga la página de añadir equipo
+$("#addGearLink").on('click', function() {
+	loadPage("loadgear.html");
 });

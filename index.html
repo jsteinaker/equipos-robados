@@ -25,55 +25,56 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<a class="navbar-brand" href="#">Cámaras robadas</a>
-	<div class="collapse navbar-collapse" id="navbar-body">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#" id="mainLink">Listado</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#" id="addGearLink">Cargar equipo</a>
-			</li>
-		</ul>
-		<ul class="navbar-nav navbar-right loggedOutUI">
-			<li class="nav-item">
-				<a class="nav-link" href="#" id="registerButton">Registro</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-				Iniciar sesión <span class="caret"></span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-right">
-					<form class="dropdown-item form-signin" id="login-form">
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-								<input class="form-control login" type="text" id="emailField" placeholder="E-mail" required>
+		<div class="collapse navbar-collapse" id="navbar-body">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#" id="mainLink">Listado</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#" id="addGearLink">Cargar equipo</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav navbar-right loggedOutUI">
+				<li class="nav-item">
+					<a class="nav-link" href="#" id="registerButton">Registro</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+					Iniciar sesión <span class="caret"></span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<form class="dropdown-item form-signin" id="login-form">
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+									<input class="form-control login" type="text" id="emailField" placeholder="E-mail" required>
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+									<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" required>
+								</div>
 							</div>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-								<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" required>
+							<label id="wrongUserOrPassword">Usuario o contraseña inválidos</label>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block" id="loginButton">Ingresar</button>
 							</div>
-						</div>
-						<label id="wrongUserOrPassword">Usuario o contraseña inválidos</label>
-						<div class="form-group">
-							<button type="submit" class="btn btn-lg btn-primary btn-block" id="loginButton">Ingresar</button>
-						</div>
-					</form>
-				</div>
-			</li>
-		</ul>
-		<ul class="navbar-nav navbar-right loggedInUI">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userName"></a>
-				<div class="dropdown-menu dropdown-menu-right">
-					<form class="dropdown-item form" id="logout-form">
-						<div class="form-group">
-							<button type="submit" class="btn btn-lg btn-primary btn-block" id"=logoffButton">Cerrar sesión</button>
-						</div>
-					</form>
-				</div>
-			</li>
-		</ul>
+						</form>
+					</div>
+				</li>
+			</ul>
+			<ul class="navbar-nav navbar-right loggedInUI">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userName"></a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<form class="dropdown-item form" id="logout-form">
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block" id="logOutButton">Cerrar sesión</button>
+							</div>
+						</form>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</nav>
 	
 	<div id="body-container" class="container">	

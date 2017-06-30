@@ -32,3 +32,7 @@ p {
 .loggedInUI {
 	display: none;
 }
+
+#wrongUserOrPassword {
+	display: none;
+}

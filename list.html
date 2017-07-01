@@ -1,7 +1,9 @@
+<script src="scripts/list.js"></script>
+
 <div class="container">
 	<div class="input-group">
 		<span class="input-group-addon"><i class="fa fa-search fa-fw" aria-hidden="true"></i></span>
-		<input class="form-control" type="text" id="searchBySerial" onkeyup="searchBySerial()" placeholder="Buscar por número de serie...">
+		<input class="form-control" type="text" id="searchBySerial" data-ng-model="filter" placeholder="Filtrar...">
 	</div>
 	<div class="table-responsive">
 		<table class="table table-hover table-condensed">
@@ -16,9 +18,15 @@
 				</tr>
 			</thead>
 			<tbody id="mainTableBody">
+				<tr data-ng-repeat="equipo in equipos | filter:filter">
+					<td>{{ equipo.$id }}</td>
+					<td>{{ equipo.gear }}</td>
+					<td>{{ equipo.serial }}</td>
+					<td>{{ equipo.owner }}</td>
+					<td>{{ equipo.email }}</td>
+					<td>{{ equipo.phone }}</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-
-<script src="scripts/list.js"></script>

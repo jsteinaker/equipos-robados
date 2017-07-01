@@ -2,7 +2,7 @@
 <!--
   Copyright 2017 JS
 -->
-<html lang="es">
+<html lang="es" data-ng-app="main">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md mb-4">
+	<nav data-ng-controller="authController as vm" class="navbar navbar-inverse bg-inverse navbar-toggleable-md mb-4">
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-body" aria-expanded="false">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -31,27 +31,27 @@
 					<a class="nav-link" href="#" id="mainLink">Listado</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" id="addGearLink">Cargar equipo</a>
+					<a class="nav-link" href="/#!/cargar">Cargar equipo</a>
 				</li>
 			</ul>
-			<ul class="navbar-nav navbar-right loggedOutUI">
+			<ul class="navbar-nav navbar-right" data-ng-hide="firebaseUser">
 				<li class="nav-item">
-					<a class="nav-link" href="#" id="registerButton">Registro</a>
+					<a class="nav-link" href="/#!/registro" id="registerButton">Registro</a>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
 					Iniciar sesión <span class="caret"></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<form class="dropdown-item form-signin" id="login-form">
+						<form data-ng-submit="logIn()" class="dropdown-item form-signin" id="login-form">
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-									<input class="form-control login" type="text" id="emailField" placeholder="E-mail" required>
+									<input class="form-control login" type="text" id="emailField" placeholder="E-mail" data-ng-model="email" required>
 								</div>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-									<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" required>
+									<input class="form-control login" type="password" id="passwordField" placeholder="Contraseña" data-ng-model="password" required>
 								</div>
 							</div>
 							<label id="wrongUserOrPassword">Usuario o contraseña inválidos</label>
@@ -62,11 +62,11 @@
 					</div>
 				</li>
 			</ul>
-			<ul class="navbar-nav navbar-right loggedInUI">
+			<ul class="navbar-nav navbar-right" data-ng-show="firebaseUser">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="userName"></a>
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ firebaseUser.email }}</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<form class="dropdown-item form" id="logout-form">
+						<form data-ng-submit="logOut()" class="dropdown-item form">
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary btn-block" id="logOutButton">Cerrar sesión</button>
 							</div>
@@ -77,8 +77,9 @@
 		</div>
 	</nav>
 	
-	<div id="body-container" class="container">	
+	<div data-ng-view id="body-container" class="container">	
 	</div>
+	
 	<footer class="footer text-center">
 		<div class="container center-vertical">
 			<p class="text-muted">Hecho con amor usando <a href="https://www.firebase.com">Firebase</a> y <a href="https://pages.github.com">GitHub Pages</a>.</p>
@@ -91,6 +92,13 @@
 	
 	<!-- Firebase SDK -->
 	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+
+	<!-- Angular.js con módulo route-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+	
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
 <script>
   // Initialize Firebase
@@ -106,7 +114,7 @@
 </script>
 
 <!-- Site logic -->
-<script src="scripts/main.js"></script>
+<script src="scripts/index.js"></script>
 
 </body>
 </html>

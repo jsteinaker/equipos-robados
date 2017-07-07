@@ -1,7 +1,7 @@
-<div class="row loggedOutUI">
+<div class="row" data-ng-hide="firebaseUser">
 	<h4>Debes iniciar sesión para poder añadir un nuevo equipo.</h4>
 </div>
-<div class="row loggedInUI">
+<div class="row" data-ng-show="firebaseUser">
 	<form id="addGearForm" class="form-control">
 		<div class="form-group">
 			<label for="gearInput">Cámara o lente</label>

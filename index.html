@@ -39,9 +39,7 @@
 					<a class="nav-link" href="/#!/registro" id="registerButton">Registro</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-					Iniciar sesión <span class="caret"></span>
-					</a>
+					<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">Iniciar sesión</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<form data-ng-submit="logIn()" class="dropdown-item form-signin" id="login-form">
 							<div class="form-group">
@@ -64,7 +62,7 @@
 			</ul>
 			<ul class="navbar-nav navbar-right" data-ng-show="firebaseUser">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ firebaseUser.email }}</a>
+					<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">{{ firebaseUser.email }}</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<form data-ng-submit="logOut()" class="dropdown-item form">
 							<div class="form-group">
@@ -77,7 +75,7 @@
 		</div>
 	</nav>
 	
-	<div data-ng-view id="body-container" class="container">	
+	<div data-ng-view data-ng-controller="authController as vm" id="body-container" class="container">	
 	</div>
 	
 	<footer class="footer text-center">
@@ -93,7 +91,7 @@
 	<!-- Firebase SDK -->
 	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 
-	<!-- Angular.js con módulo route-->
+	<!-- Angular.js con módulos route-->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
 	

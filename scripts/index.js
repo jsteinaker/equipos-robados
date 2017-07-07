@@ -44,25 +44,49 @@ angular.module('main', ['ngRoute', 'firebase'])
 			vm.auth.$signOut();
 		}
 
-		// UI para usuarios
-		vm.loggedInUI = function() {
-			console.log($scope.firebaseUser.email);
-		}
+		// Crea un nuevo usuario
+		$scope.createUser = function(email, password) {
+			vm.auth.$createUserWithEmailAndPassword(email, password, function(error, user) {
+				if (error) {
+					switch (error.code) {
+						case "EMAIL_TAKEN":
+							console.log("Email already in use");
+							break;
+						case "INVALID_EMAIL":
+							console.log("Invalid email");
+							break;
+						default:
+							console.log("Eror: ", error);
+					}
+				}
+				else {
+					document.getElementById("registerOK").modal();
+				}
+			});
+		};
 
-		// UI deslogueados
-		vm.loggedOutUI = function() {
-			console.log("LoggedOutUI");
-		}
+		// Llamada cuando cambia el estado de autenticación
 		vm.auth.$onAuthStateChanged(function(firebaseUser) {
 			$scope.firebaseUser = firebaseUser;
-			if (firebaseUser === null) {
-				vm.loggedOutUI();
-			}
-			else {
-				vm.loggedInUI();
-			}
-		});
+			});
 	}])
 	.factory('Auth', ["$firebaseAuth", function($firebaseAuth) {
 		return $firebaseAuth();
-	}]);
+	}])
+	.directive("matchPassword", function() {
+		return {
+			require: "ngModel",
+			scope: {
+				otherModelValue: "=matchPassword"
+			},
+			link: function(scope, element, attributes, ngModel) {
+				ngModel.$validators.matchPassword = function(modelValue) {
+					return modelValue == scope.otherModelValue;
+				};
+				
+				scope.$watch("otherModelValue", function() {
+					ngModel.$validate();
+				});
+			}
+		};
+	});

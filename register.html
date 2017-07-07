@@ -1,18 +1,18 @@
 <h4>Registro</h4>
 <form name="registerForm" data-ng-submit="registerForm.$valid && createUser(chosenEmail, chosenPassword)" class="form-control">
-	<div class="form-group" id="realNameDiv" data-ng-class="{ 'has-danger': registerForm.chosenRealName.$invalid && !registerForm.chosenRealName.$pristine }">
+	<div class="form-group" data-ng-class="{ 'has-danger': registerForm.chosenRealName.$invalid && !registerForm.chosenRealName.$pristine }">
 		<label for="chosenRealName">Nombre completo</label>
 		<input name="chosenRealName" type="text" data-ng-model="chosenRealName" class="form-control" required>
 	</div>
-	<div class="form-group" id="emailDiv" data-ng-class="{ 'has-danger': registerForm.chosenEmail.$invalid && !registerForm.chosenEmail.$pristine }">
+	<div class="form-group" data-ng-class="{ 'has-danger': registerForm.chosenEmail.$invalid && !registerForm.chosenEmail.$pristine }">
 		<label for="email">E-mail</label>
 		<input name="chosenEmail" data-ng-model="chosenEmail" type="email" class="form-control" required> 
 	</div>
-	<div class="form-group" id="passwordDiv" data-ng-class="{ 'has-danger': registerForm.chosenPassword.$invalid && !registerForm.chosenPassword.$pristine }">
+	<div class="form-group" data-ng-class="{ 'has-danger': registerForm.chosenPassword.$invalid && !registerForm.chosenPassword.$pristine }">
 		<label for="chosenPassword">Contraseña</label>
 		<input name="chosenPassword" data-ng-model="chosenPassword" type="password" class="form-control" required>
 	</div>
-	<div class="form-group" id="repeatPasswordDiv" data-ng-class="{ 'has-danger': registerForm.repeatPassword.$invalid && !registerForm.repeatPassword.$pristine }">
+	<div class="form-group" data-ng-class="{ 'has-danger': registerForm.repeatPassword.$invalid && !registerForm.repeatPassword.$pristine }">
 		<label for="repeatPassword">Repita contraseña</label>
 		<input name="repeatPassword" type="password" class="form-control" required data-ng-model="repeatPassword" data-match-password="chosenPassword">
 	</div>

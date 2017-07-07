@@ -15,20 +15,39 @@ angular.module('main', ['ngRoute', 'firebase'])
 			templateUrl: "register.html"
 		})
 		.when("/cargar", {
-			controller: "mainController",
+			controller: "gearDataController",
 			controllerAs: "vm",
 			templateUrl: "loadgear.html"
 		})
 		.otherwise({
-			redirectTo: "/registro"
+			redirectTo: "/"
 		});
 	})
 	.controller('mainController', function($scope) {
 	})
 	.controller('gearDataController', ['$scope', '$firebaseArray', function($scope, $firebaseArray) {
-		var database = firebase.database().ref('gear');
+		var vm = this;
+		vm.database = firebase.database().ref('gear');
 		// Descarga de datos a un objeto local
-		$scope.equipos = $firebaseArray(database);
+		$scope.equipos = $firebaseArray(vm.database);
+
+		// Añadir equipo
+		$scope.addGear = function(gear, serial, owner, email, phone) {
+			var data = {
+				gear: gear,
+				serial: serial,
+				owner: owner,
+				email: email,
+				phone: phone
+			};
+
+			$scope.equipos.$add(data).then(function(error) {
+				if (error) {
+					console.log(error);
+				}
+			});
+		};
+
 	}])
 	.controller('authController', ['$scope', 'Auth', function($scope, Auth) {
 		var vm = this;
